@@ -30,8 +30,8 @@ function newLinkedList(){
                 this.tail = this.head;
                 return this.head;
             } else {
+                this.tail.nextNode = toInsert;
                 this.tail = toInsert;
-                this.tail.nextNode = newNode();
             }
             return this.tail;
         },
@@ -44,14 +44,6 @@ function newLinkedList(){
                 cur = cur.nextNode;
             }
             return size;
-        },
-
-        getHead() {
-            return this.head;
-        },
-
-        getTail() {
-            return this.tail;
         },
 
         at(index) {
@@ -67,6 +59,23 @@ function newLinkedList(){
             return currentNode.value;         
         },
 
+        pop() {
+            if (this.head.value == null) return 'List is empty!'
+            if (this.head.nextNode == null) { // List has 1 element
+                this.head = newNode();
+                this.tail = newNode();
+                return;
+            }
+            this.tail = null;
+            let prevNode = null;
+            let currentNode = this.head;
+            while (currentNode.nextNode != null) {
+                prevNode = currentNode;
+                currentNode = currentNode.nextNode;
+            }
+            prevNode.nextNode = null;
+            this.tail = prevNode;
+        },
         
     }
 }
