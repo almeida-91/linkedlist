@@ -39,7 +39,7 @@ function newLinkedList(){
         size() {
             let cur = this.head;
             let size = 0;
-            while ( cur.value != null){
+            while ( cur != null){
                 size++;
                 cur = cur.nextNode;
             }
@@ -76,7 +76,17 @@ function newLinkedList(){
             prevNode.nextNode = null;
             this.tail = prevNode;
         },
-        
+
+        contains(value) {
+            if (this.head.value == null) return 'List is empty!';
+            if (value == null) return 'Please enter a value.';
+            let currentNode = this.head;
+            while (currentNode != null){
+                if (currentNode.value == value) return true;
+                currentNode = currentNode.nextNode;
+            }
+            return false;
+        }
     }
 }
 
