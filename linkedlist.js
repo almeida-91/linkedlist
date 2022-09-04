@@ -11,15 +11,15 @@ function newLinkedList(){
         tail : newNode(),
 
         prepend(value) {
-        if (this.head.value == null){
-            return append(value);
-        } else {
-            let toInsert = newNode();
-            toInsert.value = value;
-            toInsert.nextNode = this.head;
-            this.head = toInsert;
-        }
-        return this.head;
+            if (this.head.value == null){
+                return append(value);
+            } else {
+                let toInsert = newNode();
+                toInsert.value = value;
+                toInsert.nextNode = this.head;
+                this.head = toInsert;
+            }
+            return this.toString();
         },
 
         append(value) {
@@ -33,7 +33,7 @@ function newLinkedList(){
                 this.tail.nextNode = toInsert;
                 this.tail = toInsert;
             }
-            return this.tail;
+            return this.toString();
         },
 
         size() {
@@ -75,6 +75,7 @@ function newLinkedList(){
             }
             prevNode.nextNode = null;
             this.tail = prevNode;
+            return this.toString();
         },
 
         contains(value) {
@@ -87,6 +88,7 @@ function newLinkedList(){
             }
             return false;
         },
+
         find(value) {
             if (this.head.value == null) return 'List is empty!';
             if (value == null) return 'Please enter a value.';
@@ -99,6 +101,7 @@ function newLinkedList(){
             }
             return null;
         },
+
         toString(){
             if (this.head.value == null) return 'List is empty!';
             let currentNode = this.head;
@@ -110,6 +113,37 @@ function newLinkedList(){
             string += ' null';
             console.log(string);
         },
+
+        insertAt(value,index){
+            if (this.head.value == null) return 'List is empty!';
+            if (value == null) return 'Please enter a value.';
+            if (index < 0 || index == null) return `Please enter an index greater than or equal to 0 `;
+            let prevNode = null;
+            let currentNode = this.head;
+            let currentIndex = 0;
+            let toInsert = newNode();
+            toInsert.value = value;
+            while (currentNode!=null){
+                if (currentIndex == index){
+                    toInsert.nextNode = currentNode.nextNode;
+                    if (prevNode == null){
+                        this.head = toInsert;
+                    } else prevNode.nextNode = toInsert;
+                    if (currentNode.nextNode == null){
+                        this.tail = toInsert;
+                        prevNode.nextNode = toInsert;
+                    }
+                    currentNode = null;
+                    return this.toString();
+                }
+                currentIndex++;
+                prevNode = currentNode;
+                currentNode = currentNode.nextNode;
+            }
+            return `Please enter an index between 0 and ${currentIndex-1}`;
+        },
+
+        
     }
 }
 
@@ -117,6 +151,9 @@ function newLinkedList(){
 
 let LinkedList = newLinkedList();
 
+LinkedList.append(1);
+LinkedList.append(2);
+LinkedList.append(3);
 
 
 
