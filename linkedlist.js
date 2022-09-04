@@ -86,7 +86,30 @@ function newLinkedList(){
                 currentNode = currentNode.nextNode;
             }
             return false;
-        }
+        },
+        find(value) {
+            if (this.head.value == null) return 'List is empty!';
+            if (value == null) return 'Please enter a value.';
+            let index = 0;
+            let currentNode = this.head;
+            while (currentNode!=null){
+                if (currentNode.value == value) return index;
+                currentNode = currentNode.nextNode;
+                index++;
+            }
+            return null;
+        },
+        toString(){
+            if (this.head.value == null) return 'List is empty!';
+            let currentNode = this.head;
+            let string = "";
+            while (currentNode != null){
+                string += `( ${currentNode.value} ) -> `;
+                currentNode = currentNode.nextNode;
+            }
+            string += ' null';
+            console.log(string);
+        },
     }
 }
 
